@@ -1,0 +1,7 @@
+<h1>Sessions#home</h1>
+<% if @current_attendee.visit.nil? %>
+  <%= link_to 'Selecciona Visita', seleccion_visita_path, method: :get %>
+<% end %>
+<% if @current_attendee.workshop.nil? %>
+<%= link_to 'Selecciona Taller', seleccion_taller_path, method: :get %>
+<% end %>

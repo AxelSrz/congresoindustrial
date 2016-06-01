@@ -1,0 +1,44 @@
+<!-- MAIN MENU -->
+<div class="nav-bar">
+  <div class="container">
+    <div id="centerDiv">
+      <ul class="nav centerUL">
+        <li><a href="#">Asistentes</a></li>
+        <li><%= link_to "Registrar asistentes", registro_asistentes_path %></li>
+        <li><%= link_to "Alta de talleres y visitas", agregar_vot_path, class: "current" %></li>
+        <li><a href="#">Abrir lugares en taller o visita</a></li>
+        <li><a href="#">Crear un administrador</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- END MAIN MENU -->
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- CONTAINER -->
+  <div class="container">
+
+    <!-- left content -->
+    <div class="main">
+      <h1>Alta de talleres y visitas</h1>
+      <hr>
+
+      <h3>Selecciona la opción que deseas</h3>
+      <a href="" class="btn">Dar de alta un taller</a>
+      <a href="" class="btn">Dar de alta una visita</a>
+    </div>
+
+    <!-- right sidebar -->
+    <div class="aside">
+      <h3>Tu cuenta</h3>
+      <p>Bienvenido/a, <strong><%= @current_user.nombre %></strong>
+        <br /><%= link_to "Cerrar Sesion", logout_path%></p>
+    </div>
+
+  </div>
+    <!-- END CONTAINER -->
+
+</div>
+  <!-- END CONTENT -->

@@ -1,19 +1,79 @@
-<% @page_title = "UserAuth | Signup" %>
-<div class="Sign_Form">
-  <h1>Sign Up</h1>
-  <%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
-    <p> Nombre:</br> <%= f.text_field :nombre%> </p>
-    <p> Email:</br> <%= f.text_field :email%> </p>
-    <p> Univeridad:</br> <%= f.text_field :universidad%> </p>
-    <p> Password:</br> <%= f.password_field :password%></p>
-    <p> Password Confirmation:</br> <%= f.password_field :password_confirmation%> </p>
-    <%= f.submit :Signup %>
-  <% end %>
-  <% if @user.errors.any? %>
-    <ul class="Signup_Errors">
-    <% for message_error in @user.errors.full_messages %>
-      <li>* <%= message_error %></li>
-    <% end %>
-    </ul>
-  <% end %>
+<!-- MAIN MENU -->
+<div class="nav-bar">
+  <div class="container">
+    <div id="centerDiv">
+      <ul class="nav centerUL">
+        <li><a href="#">Asistentes</a></li>
+        <li><%= link_to "Registrar asistentes", registro_asistentes_path, class: "current" %></li>
+        <li><%= link_to "Alta de talleres y visitas", agregar_vot_path %></li>
+        <li><a href="#">Abrir lugares en taller o visita</a></li>
+        <li><a href="#">Crear un administrador</a></li>
+      </ul>
+    </div>
+  </div>
 </div>
+<!-- END MAIN MENU -->
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- CONTAINER -->
+  <div class="container">
+
+    <!-- left content -->
+    <div class="main">
+      <h1>Registrar asistentes</h1>
+      <hr>
+
+      <%= form_tag(:url => {:controller => 'atendees', :action => 'create'}) do |f| %>
+
+      <h3>1. Pega las direcciones de correo</h3>
+      <p>Copia y pega aquí las direcciones de correo de los asistentes que deseas agregar al sistema.
+        <br />(un correo por renglón)</p>
+
+      <%= text_area_tag :emails, nil, placeholder: "Pega las direcciones de correo aquí." %></p>
+        <br /><br />
+
+      <h3>2. Selecciona la fecha de inscripción</h3>
+      <p>Selecciona la fecha y hora (AAAA/MM/DD HH:MM) a la que se podrán inscribir a talleres y vistas los asistentes que añadiste:</p>
+
+
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <%= datetime_field_tag :hora_asignada, nil, id:'datetimepicker4', placeholder: "aaaa/mm/dd  hh:mm" %></p>
+            </div>
+            <script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker4').datetimepicker();
+                });
+            </script>
+        </div>
+    </div>
+      <br /><br />
+
+      <%= submit_tag "Registrar", class: "btn" %>
+
+      <% end %>
+      <% if @atendee.errors.any? %>
+      <ul class="Signup_Errors">
+        <% for message_error in @atendee.errors.full_messages %>
+        <li>* <%= message_error %></li>
+        <% end %>
+      </ul>
+      <% end %>
+      <hr>
+    </div>
+
+      <!-- right sidebar -->
+      <div class="aside">
+        <h3>Tu cuenta</h3>
+        <p>Bienvenido/a, <strong><%= @current_user.nombre %></strong>
+          <br /><%= link_to "Cerrar Sesion", logout_path%></p>
+      </div>
+
+  </div>
+  <!-- END CONTAINER -->
+
+</div>
+<!-- END CONTENT -->

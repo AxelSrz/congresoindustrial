@@ -1,0 +1,9 @@
+<% @available_visits.each do |visit| %>
+  <tr>
+      <td><%= visit['nombre'] %></td>
+      <td><%= visit['descripcion'] %></td>
+      <td><%= visit['empresa'] %></td>
+      <td><%= visit['lugar'] %></td>
+      <td><%= button_to 'seleccionar', {:controller => "atendees", :action => "associate_visit", :id => visit['id']} , {:method=>:post}  %></td>
+  </tr>
+<% end %>

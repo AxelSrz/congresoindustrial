@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 gem 'rails', '4.2.2'
+gem 'rake', '11.1.2'
 
 ################################################################################
 # Assets
@@ -15,6 +16,7 @@ gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'flavour_saver'
 gem 'therubyracer'
+gem 'bcrypt'
 
 # Javascript libraries
 gem 'jquery-datatables-rails', '~> 3.1.1'
@@ -40,6 +42,11 @@ gem 'jquery-minicolors-rails'
 gem 'image-picker-rails'
 gem 'bootstrap-wysihtml5-rails'
 gem 'tinymce-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-timepicker-addon-rails'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-datetimepicker'
+end
 
 ################################################################################
 # ActiveRecord
@@ -56,7 +63,6 @@ gem 'net-ssh'
 # UKKO's Gems
 ###############################################################################
 # User authentication & session management
-gem 'heimdall_engine', git: 'http://git.ukko.mx/iker.n/heimdall-engine.git'
 # Crud Controller
 gem 'crud_controller', git: 'http://git.ukko.mx/ukko/crud_controller.git'
 

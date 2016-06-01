@@ -3,7 +3,21 @@ Rails.application.routes.draw do
 
   get 'workshop/new'
 
-  get 'atendees/new'
+  post ':controller(/:action(/:id))(.:format)'
+  root :to => 'sessions#login'
+  get "login", :to => "sessions#login"
+  get "logout", :to => "sessions#logout"
+  get "home", :to => "sessions#home"
+  get "attendee_home", :to => "sessions#attendee_home"
+  get "profile", :to => "sessions#profile"
+  get "setting", :to => "sessions#setting"
+  get "registro_asistentes", :to => "atendees#new"
+  post "registro_asistentes", :to => "atendees#create"
+  get "agregar_vot", :to => "admins#add_vow"
+  get "login_asistente", :to => "sessions#login_atendee"
+  get "signup_asistente", :to => "atendees#signup_atendee"
+  get "seleccion_visita", :to => "atendees#select_visit"
+  get "seleccion_taller", :to => "atendees#select_workshop"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

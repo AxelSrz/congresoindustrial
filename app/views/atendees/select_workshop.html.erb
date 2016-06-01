@@ -1,0 +1,9 @@
+<% @available_workshops.each do |workshop| %>
+  <tr>
+      <td><%= workshop['nombre'] %></td>
+      <td><%= workshop['descripcion'] %></td>
+      <td><%= workshop['empresa'] %></td>
+      <td><%= workshop['lugar'] %></td>
+      <td><%= button_to 'seleccionar', {:controller => "atendees", :action => "associate_workshop", :id => workshop['id']} , {:method=>:post}  %></td>
+  </tr>
+<% end %>
