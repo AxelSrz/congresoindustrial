@@ -1,9 +1,76 @@
-<% @available_workshops.each do |workshop| %>
-  <tr>
-      <td><%= workshop['nombre'] %></td>
-      <td><%= workshop['descripcion'] %></td>
-      <td><%= workshop['empresa'] %></td>
-      <td><%= workshop['lugar'] %></td>
-      <td><%= button_to 'seleccionar', {:controller => "atendees", :action => "associate_workshop", :id => workshop['id']} , {:method=>:post}  %></td>
-  </tr>
-<% end %>
+<!-- MAIN MENU -->
+	<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+          <li><%= link_to "Inicio", inicio_path %></li>
+          <% if @current_attendee.hora_asignada < DateTime.now %>
+          <li><%= link_to "Talleres", seleccion_taller_path, class: "current" %></li>
+          <li><%= link_to "Visitas", seleccion_visita_path %></li>
+          <% end %>
+          <li><%= link_to "Cerrar sesión de #{@current_attendee.nombre.partition(" ").first}", logout_path %></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- END MAIN MENU -->
+
+	<!-- CONTENT -->
+	<div class="content">
+
+		<!-- CONTAINER -->
+		<div class="container">
+
+			<!-- left content -->
+			<div class="mainLong">
+
+				<% if !@current_attendee.workshop %>
+				<h1 class="centerText">Selecciona un taller</h1>
+				<hr>
+
+				<div style="separatorLarge">&nbsp;</div>
+
+        <% @available_workshops.each_with_index do |workshop, index| %>
+          <div class="oneThird">
+  					<div class="conceptEnclosure" id="<%= 'gridLast' if index%3 == 2 %>">
+  						<h3><%= workshop.representante %></h3>
+              <p>Taller de <%= workshop.tipo %></p>
+  						<p><%= workshop.descripcion %></p>
+  						<p>
+  							<strong>Fecha y hora:</strong><br />
+  							<%= workshop.fecha %><br />
+  							<strong>Lugar:</strong><br />
+  							<%= workshop.lugar %><br />
+  							<strong>Disponibilidad:</strong><br />
+  							<%= workshop.cupo_actual %>/<%= workshop.asistentes_registrados + workshop.cupo_actual %>
+  						</p>
+              <%= button_to 'Inscribir', {:controller => "atendees", :action => "associate_workshop", :id => workshop['id']} , {:method=>:post, class: "btn"}  %>
+  					</div>
+  				</div>
+        <% end %>
+        <div style="separatorLarge">&nbsp;</div>
+				<% else %>
+				<div class="centerText">
+					<h1>Estas inscrito en el siguiente taller:</h1>
+					<hr>
+
+					<h3><%= @current_attendee.workshop.representante %></h3>
+          <p>Taller de <%= @current_attendee.workshop.tipo %></p>
+					<p><%= @current_attendee.workshop.descripcion %></p>
+					<p>
+						<strong>Fecha y hora:</strong><br />
+						<%= @current_attendee.workshop.fecha %><br />
+          </p>
+          <p>
+						<strong>Lugar:</strong><br />
+						<%= @current_attendee.workshop.lugar %>
+					</p>
+				</div>
+				<% end %>
+			</div>
+
+			</div>
+			<!-- END CONTAINER -->
+
+		</div>
+		<!-- END CONTENT -->

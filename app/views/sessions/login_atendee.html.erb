@@ -1,18 +1,27 @@
 
+
+<!-- CONTENT -->
 <div class="content">
+
+	<!-- CONTAINER -->
 	<div class="container">
-		<div class="main">
-			<h1>Inicia sesión</h1>
-			<hr>
-			<%= form_tag(:action => 'login_attempt_atendee') do %>
-			<p>Email:</br> <%= text_field_tag(:email) %></p>
-			<p>Password:</br> <%= password_field_tag :login_password %></p>
-			<%= submit_tag "Log In", class: "btn"  %>
-			<% end %>
+
+		<!-- left content -->
+		<div class="mainLong">
+			<div class="login">
+				<h1>Inicia sesión</h1>
+				<hr>
+
+				<%= form_tag(:action => 'login_attempt_atendee') do %>
+				<p><h3>Correo electrónico</h3> <%= text_field_tag(:email)  %></p>
+				<p><h3>Contraseña</h3> <%= password_field_tag :login_password %></p>
+				<%= submit_tag "Iniciar sesión", class: "btn"  %>
+				<% end %>
+			</div>
 		</div>
-		<div class="aside">
-			<h3>Tu cuenta</h3>
-			<p>No has iniciado sesión</p>
-		</div>
+
 	</div>
+	<!-- END CONTAINER -->
+
 </div>
+<!-- END CONTENT -->

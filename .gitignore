@@ -56,3 +56,6 @@ bower.json
 # Ignore pow environment settings
 .powenv
 >>>>>>> dcfb16e044b9a8ec56bdafd81aee061461b0548a
+
+# Ignore application configuration
+/config/application.yml

@@ -1,16 +1,15 @@
 <!-- MAIN MENU -->
 <div class="nav-bar">
-  <div class="container">
-    <div id="centerDiv">
-      <ul class="nav centerUL">
-        <li><a href="#">Asistentes</a></li>
-        <li><%= link_to "Registrar asistentes", registro_asistentes_path, class: "current" %></li>
-        <li><%= link_to "Alta de talleres y visitas", agregar_vot_path %></li>
-        <li><a href="#">Abrir lugares en taller o visita</a></li>
-        <li><a href="#">Crear un administrador</a></li>
-      </ul>
-    </div>
-  </div>
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+					<li><%= link_to "Asistentes", lista_asistentes_path, class: "current" %></li>
+					<li><%= link_to "Talleres", lista_talleres_path %></li>
+					<li><%= link_to "Visitas", lista_visitas_path %></li>
+					<li><%= link_to "Herramientas", herramientas_path %></li>
+				</ul>
+			</div>
+		</div>
 </div>
 <!-- END MAIN MENU -->
 
@@ -20,18 +19,27 @@
 
   			<!-- left content -->
         <div class="main">
-          <h1>Registrar asistentes</h1>
+          <h1><%= link_to "Asistentes", lista_asistentes_path %> > <%= link_to "Añadir asistentes", registro_asistentes_path %> > Éxito</h1>
           <hr>
-          <h3>Los asistentes han sido registrados exitosamente</h3>
-          <p>Puedes <%= link_to "registrar más asistentes", registro_asistentes_path %> o bien, ver la <a href="">lista de asistentes</a>.</p>
+
+					<h2>Los asistentes han sido añadidos exitosamente.</h2>
+					<p>El estado de estos asistentes permanecera como "no confirmado" hasta que completen su registro.</p>
+          <%= link_to "Añadir más asistentes", registro_asistentes_path, class: "btn" %>
         </div>
       <!-- right sidebar -->
-      <div class="aside">
-        <h3>Tu cuenta</h3>
-        <p>Bienvenido/a,  <strong><%= @current_user.nombre %></strong>
-          <br /><%= link_to "Cerrar Sesion", logout_path%></p>
+			<div class="aside">
+	      <p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+	        <br /><%= link_to "Cerrar Sesion", logout_path%></p>
+				</p>
 
-  </div>
+				<h3>Actividades</h3>
+
+				<ul class="sidebar">
+          <li><%= link_to "Ver asistentes", lista_asistentes_path %></li>
+				</ul>
+
+			</div>
+	</div>
   <!-- END CONTAINER -->
 
 </div>

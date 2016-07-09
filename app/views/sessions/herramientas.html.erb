@@ -1,0 +1,70 @@
+<!-- MAIN MENU -->
+<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+					<li><%= link_to "Asistentes", lista_asistentes_path %></li>
+					<li><%= link_to "Talleres", lista_talleres_path %></li>
+					<li><%= link_to "Visitas", lista_visitas_path %></li>
+					<li><%= link_to "Herramientas", herramientas_path, class: "current" %></li>
+				</ul>
+			</div>
+		</div>
+</div>
+<!-- END MAIN MENU -->
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- CONTAINER -->
+  <div class="container">
+
+    <!-- left content -->
+    <div class="main">
+      <h1>Herramientas</h1>
+      <hr>
+
+      <h2>Añadir un administrador</h2>
+      <p><span style="color:red;">Antes de crear un administrador, ten en cuenta lo siguiente.</span><br />
+        <strong>Un administrador podrá:</strong></p>
+      <h3>Asistentes</h3>
+      <ul>
+        <li>Ver lista de asistentes</li>
+        <li>Dar de alta (añadir) asistentes nuevos</li>
+        <li>Ver códigos de confirmación de asistentes no confirmados</li>
+        <li>Eliminar asistentes no confirmados</li>
+        <li>Exportar listas desglosadas de los asistentes</li>
+        <li>Exportar listas desglosadas de los asistentes no confirmados</li>
+      </ul>
+      <h3>Talleres y visitas</h3>
+      <ul>
+        <li>Ver listas de talleres y/o vistas</li>
+        <li>Crear talleres y/o visitas</li>
+        <li>Editar la disponibilidad de un taller y/o visita</li>
+        <li>Exportar listas desglosadas de talleres y/o visitas</li>
+      </ul>
+      <h3>Herramientas</h3>
+      <ul>
+        <li>Crear nuevos administradores</li>
+      </ul>
+
+      <div class="separatorLarge"></div>
+      <%= link_to "Añadir un administrador", nuevo_administrador_path, class: "btn" %>
+      <div class="separatorLarge"></div>
+      <hr>
+
+    </div>
+
+    <!-- right sidebar -->
+    <div class="aside">
+      <p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+				<br /><%= link_to "Cerrar Sesion", logout_path%></p>
+			</p>
+
+      </div>
+
+    </div>
+    <!-- END CONTAINER -->
+
+  </div>
+  <!-- END CONTENT -->

@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
       @current_attendee = Atendee.find session[:atendee_id]
       return true
     else
-      redirect_to(:controller => 'sessions', :action => 'login')
+      redirect_to(:controller => 'sessions', :action => 'login_atendee')
       return false
     end
   end

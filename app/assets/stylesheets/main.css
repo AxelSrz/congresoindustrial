@@ -53,6 +53,7 @@ hr
 	border-top: 1px solid #ddd;
 }
 
+
 table
 {
 	background-color: transparent;
@@ -68,6 +69,16 @@ th, td
 	text-align: left;
 	border-bottom: 1px solid #ddd;
     font-size: 0.9em;
+}
+
+table .btn
+{
+  padding: .3em 1em !important;
+}
+
+table .red
+{
+  background-color: red;
 }
 
 a
@@ -240,6 +251,12 @@ Single styles
 	background-color: red;
 }
 
+.btnSmall
+{
+  padding: .3em 1em !important;
+  width: 100% !important;
+}
+
 .table
 {
 	width: 100%;
@@ -260,6 +277,11 @@ Single styles
 	list-style: none;
 }
 
+.listfilter
+{
+  margin-top:0 !important;
+}
+
 .list-inline > li
 {
 	display: inline-block;
@@ -267,9 +289,38 @@ Single styles
 	padding-left: 5px;
 }
 
+
+.separator
+{
+    margin: 1em 0;
+}
+
+.separatorLarge
+{
+    margin: 1.8em 0;
+}
+
+.separatorXL
+{
+  margin:2.2em 0;
+}
+
+.clear
+{
+  clear:both;
+}
+
 input[type=text], input[type=email], input[type=password], input[type=datetime]
 {
     width:85%;
+    height:3em;
+    font: 1em/1.2 'Raleway', sans-serif;
+    padding: 0 1em;
+}
+
+input[type=number]
+{
+    width:4em;
     height:3em;
     font: 1em/1.2 'Raleway', sans-serif;
     padding: 0 1em;
@@ -282,6 +333,58 @@ textarea
     font: 1em/1.2 'Raleway', sans-serif;
     padding: 1em 1em;
 }
+
+.textSmall
+{
+    width:inherit !important;
+}
+
+ul.sidebar li
+{
+  margin:10px 0;
+}
+
+.toolList
+{
+  margin:5px 0;
+}
+
+.oneThird
+{
+  text-align: center;
+  width:33%;
+  float:left;
+  border-right: 1px solid #d2d2d2;
+  padding:10px 0;
+  margin-bottom:40px;
+}
+
+.oneHalf
+{
+  text-align: center;
+  width:49%;
+  float:left;
+  border-right:  1px solid #d2d2d2;
+  padding:10px 0;
+  margin:20px 0;
+}
+
+.conceptEnclosure
+{
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+#gridLast
+{
+  border-right: 1px solid #fff !important;
+}
+
+.centerText
+{
+  text-align: center;
+}
+
 
 /* -----------------------
 Wide styles
@@ -300,6 +403,24 @@ Wide styles
 		margin-right: 5%;
 		margin-bottom: 1em;
 	}
+
+  .mainLong
+  {
+    float:left;
+    width:100%;
+    margin-right:0;
+    margin-bottom: 1em;
+  }
+
+  .mainLong input
+  {
+    text-align:center;
+  }
+
+  .login
+  {
+    text-align:center;
+  }
 
 	.aside
 	{

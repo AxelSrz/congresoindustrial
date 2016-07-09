@@ -1,0 +1,49 @@
+<!-- MAIN MENU -->
+<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+					<li><%= link_to "Asistentes", lista_asistentes_path %></li>
+					<li><%= link_to "Talleres", lista_talleres_path, class: "current" %></li>
+					<li><%= link_to "Visitas", lista_visitas_path %></li>
+					<li><%= link_to "Herramientas", herramientas_path %></li>
+				</ul>
+			</div>
+		</div>
+</div>
+    <!-- END MAIN MENU -->
+
+	<!-- CONTENT -->
+	<div class="content">
+
+		<!-- CONTAINER -->
+		<div class="container">
+
+			<!-- left content -->
+			<div class="main">
+				<h1><%= link_to "Talleres", lista_talleres_path %> > <%= link_to "Añadir un taller", nuevo_taller_path %> > Éxito</h1>
+                <hr>
+
+                <h3>El taller ha sido registrado exitosamente</h3>
+                <p>Puedes  <%= link_to "registrar otro taller", nuevo_taller_path %> o bien, <a href="">regresar a la pantalla principal</a>.</p>
+			</div>
+
+			<!-- right sidebar -->
+      <div class="aside">
+        <p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+          <br /><%= link_to "Cerrar Sesion", logout_path%>
+        </p>
+
+				<h3>Actividades</h3>
+
+				<ul class="sidebar">
+					<li><%= link_to "Ver lista de talleres", lista_talleres_path %></li>
+				</ul>
+
+				</div>
+
+			</div>
+			<!-- END CONTAINER -->
+
+		</div>
+		<!-- END CONTENT -->

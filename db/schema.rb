@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528231303) do
+ActiveRecord::Schema.define(version: 20160624012127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,23 @@ ActiveRecord::Schema.define(version: 20160528231303) do
   add_index "atendees", ["visit_id"], name: "index_atendees_on_visit_id", using: :btree
   add_index "atendees", ["workshop_id"], name: "index_atendees_on_workshop_id", using: :btree
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
   create_table "visits", force: :cascade do |t|
-    t.string   "nombre"
     t.text     "descripcion"
     t.string   "empresa"
     t.string   "lugar"
@@ -55,12 +70,13 @@ ActiveRecord::Schema.define(version: 20160528231303) do
     t.integer  "cupo_actual"
     t.integer  "cupo_maximo"
     t.integer  "asistentes_registrados"
+    t.string   "duracion"
   end
 
   create_table "workshops", force: :cascade do |t|
-    t.string   "nombre"
+    t.string   "representante"
     t.text     "descripcion"
-    t.string   "empresa"
+    t.string   "tipo"
     t.string   "lugar"
     t.datetime "fecha"
     t.datetime "created_at",             null: false
@@ -68,6 +84,7 @@ ActiveRecord::Schema.define(version: 20160528231303) do
     t.integer  "cupo_actual"
     t.integer  "cupo_maximo"
     t.integer  "asistentes_registrados"
+    t.string   "duracion"
   end
 
 end

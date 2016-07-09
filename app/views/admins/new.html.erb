@@ -1,18 +1,63 @@
-<% @page_title = "UserAuth | Signup" %>
-<div class="Sign_Form">
-  <h1>Sign Up</h1>
-  <%= form_for(:admin, :url => {:controller => 'admins', :action => 'create'}) do |f| %>
-    <p> Nombre:</br> <%= f.text_field :nombre%> </p>
-    <p> Email:</br> <%= f.text_field :email%> </p>
-    <p> Password:</br> <%= f.password_field :password%></p>
-    <p> Password Confirmation:</br> <%= f.password_field :password_confirmation%> </p>
-    <%= f.submit :Signup %>
-  <% end %>
-  <% if @admin.errors.any? %>
-    <ul class="Signup_Errors">
-    <% for message_error in @admin.errors.full_messages %>
-      <li>* <%= message_error %></li>
-    <% end %>
-    </ul>
-  <% end %>
+<!-- MAIN MENU -->
+<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+					<li><%= link_to "Asistentes", lista_asistentes_path %></li>
+					<li><%= link_to "Talleres", lista_talleres_path %></li>
+					<li><%= link_to "Visitas", lista_visitas_path %></li>
+					<li><%= link_to "Herramientas", herramientas_path, class: "current" %></li>
+				</ul>
+			</div>
+		</div>
 </div>
+<!-- END MAIN MENU -->
+
+<!-- CONTENT -->
+	<div class="content">
+
+		<!-- CONTAINER -->
+		<div class="container">
+
+			<!-- left content -->
+			<div class="main">
+				<h1><%= link_to "Herramientas", herramientas_path %> > Añadir un administrador</h1>
+				<hr>
+
+        <%= form_tag(:url => {:controller => 'admins', :action => 'create'}) do |f| %>
+          <h3>1. Nombre del administrador:</h3>
+          <%= text_field_tag :nombre, nil %>
+          <div class="separator"></div>
+
+          <h3>2. Correo electrónico</h3>
+          <%= email_field_tag :email, nil %></p>
+          <div class="separator"></div>
+
+          <h3>3. Contraseña</h3>
+          <%= password_field_tag :password, nil %>
+          <div class="separator"></div>
+
+          <h3>4. Confirma contraseña</h3>
+          <%= password_field_tag :password_confirmation, nil%>
+          <div class="separator"></div>
+
+          <h3>Estamos listos</h3>
+          <%= submit_tag "Añadir administrador", class: "btn" %>
+
+        <% end %>
+
+			</div>
+
+			<!-- right sidebar -->
+      <div class="aside">
+        <p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+  				<br /><%= link_to "Cerrar Sesion", logout_path%></p>
+  			</p>
+
+        </div>
+
+      </div>
+			<!-- END CONTAINER -->
+
+		</div>
+		<!-- END CONTENT -->

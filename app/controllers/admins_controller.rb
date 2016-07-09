@@ -1,6 +1,5 @@
 class AdminsController < ApplicationController
-  before_filter :save_login_state, :only => [:new, :create]
-  before_filter :authenticate_user, :only => [:add_vow]
+  before_filter :authenticate_user, :only => [:add_vow, :new, :create]
 
   def new
     @admin = Admin.new()
@@ -15,7 +14,7 @@ class AdminsController < ApplicationController
       flash[:notice] = "Form is invalid"
       flash[:color]= "invalid"
     end
-    render "new"
+    render "success"
   end
 
   def add_vow

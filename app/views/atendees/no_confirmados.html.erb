@@ -1,0 +1,72 @@
+<!-- MAIN MENU -->
+<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+					<li><%= link_to "Asistentes", lista_asistentes_path, class: "current" %></li>
+					<li><%= link_to "Talleres", lista_talleres_path %></li>
+					<li><%= link_to "Visitas", lista_visitas_path %></li>
+					<li><%= link_to "Herramientas", herramientas_path %></li>
+				</ul>
+			</div>
+		</div>
+</div>
+<!-- END MAIN MENU -->
+
+<!-- CONTENT -->
+<div class="content">
+
+	<!-- CONTAINER -->
+	<div class="container">
+
+		<!-- left content -->
+		<div class="main">
+			<h1><%= link_to "Asistentes", lista_asistentes_path %> > Asistentes no confirmados</h1>
+      <p><%= link_to "Ver asistentes confirmados", lista_asistentes_path %></p>
+			<hr>
+
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Fecha de registro</th>
+						<th>Email</th>
+						<th>Codigo de registro</th>
+						<th>Borrar asistente</th>
+					</tr>
+				</thead>
+				<tbody>
+          <% @atendees.each_with_index do |atendee, index| %>
+					<tr>
+						<th scope="row"><%= index + 1 %></th>
+						<td><%= atendee.created_at %></td>
+            <td><%= atendee['email'] %></td>
+            <td><%= atendee.registration_code %></td>
+						<td><a href="" class="btn red">Borrar</a></td>
+					</tr>
+          <% end %>
+				</tbody>
+			</table>
+
+		</div>
+
+		<!-- right sidebar -->
+		<div class="aside">
+			<p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+				<br /><%= link_to "Cerrar Sesion", logout_path%></p>
+			</p>
+
+			<h3>Actividades</h3>
+
+			<ul class="sidebar">
+				<li><%= link_to "Añadir asistentes", registro_asistentes_path %></li>
+				<li><a href ="">Exportar esta lista</a></li>
+			</ul>
+
+		</div>
+
+		</div>
+	<!-- END CONTAINER -->
+
+</div>
+<!-- END CONTENT -->

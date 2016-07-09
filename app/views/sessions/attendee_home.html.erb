@@ -1,7 +1,88 @@
-<h1>Sessions#home</h1>
-<% if @current_attendee.visit.nil? %>
-  <%= link_to 'Selecciona Visita', seleccion_visita_path, method: :get %>
-<% end %>
-<% if @current_attendee.workshop.nil? %>
-<%= link_to 'Selecciona Taller', seleccion_taller_path, method: :get %>
-<% end %>
+<!-- MAIN MENU -->
+	<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+          <li><%= link_to "Inicio", inicio_path, class: "current" %></li>
+          <% if @current_attendee.hora_asignada < DateTime.now %>
+          <li><%= link_to "Talleres", seleccion_taller_path %></li>
+          <li><%= link_to "Visitas", seleccion_visita_path %></li>
+          <% end %>
+          <li><%= link_to "Cerrar sesión de #{@current_attendee.nombre.partition(" ").first}", logout_path %></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- END MAIN MENU -->
+
+	<!-- CONTENT -->
+	<div class="content">
+
+		<!-- CONTAINER -->
+		<div class="container">
+
+			<!-- left content -->
+			<div class="mainLong">
+				<h1 class="centerText">Bienvenido/a, <strong><%= @current_attendee.nombre %></strong></h1>
+				<p class="centerText"><%= @current_attendee.email %></p>
+				<hr>
+				<div style="separatorLarge">&nbsp;</div>
+        <% if @current_attendee.hora_asignada < DateTime.now %>
+				<div class="oneHalf" id="gridFirst">
+					<div class="conceptEnclosure">
+						<h1>Taller</h1>
+            <% if @current_attendee.workshop.nil? %>
+            <p style="color:red;">No has seleccionado un taller</p>
+            <%= link_to 'Elegir un taller', seleccion_taller_path, method: :get, class: "btn" %>
+            <% else %>
+    					<h3><%= @current_attendee.workshop.representante %></h3>
+    					<p>
+    						<strong>Fecha y hora:</strong><br />
+    						<%= @current_attendee.workshop.fecha %><br />
+    						<strong>Lugar:</strong><br />
+    						<%= @current_attendee.workshop.lugar %>
+    					</p>
+            <% end %>
+					</div>
+				</div>
+
+				<div class="oneHalf" id="gridLast">
+					<div class="conceptEnclosure">
+						<h1>Visita</h1>
+            <% if @current_attendee.visit.nil? %>
+              <p style="color:red;">No has seleccionado una visita</p>
+              <%= link_to 'Elegir una visita', seleccion_visita_path, method: :get, class: "btn" %>
+            <% else %>
+            <h3><%= @current_attendee.visit.empresa %></h3>
+            <p>
+               <strong>Fecha y hora:</strong><br />
+               <%= @current_attendee.visit.fecha %><br />
+               <strong>Lugar:</strong><br />
+               <%= @current_attendee.visit.lugar %>
+            </p>
+            <% end %>
+					</div>
+				</div>
+
+				<div class="clear"></div>
+				<div class="separatorLarge"></div>
+
+				<div class="centerText">
+					<input type="button" class="btn" onClick="window.print()" value="Imprimir"/>
+          <% if !@current_attendee.visit || !@current_attendee.workshop %>
+            <p style="margin-top:40px;"><strong>Importante:</strong> la disponibilidad de talleres y visitas está sujeta a los horarios de inscripción.</p>
+          <% end %>
+				</div>
+        <% else %>
+        <div class="centerText">
+					<p>Lo sentimos, todavía no puedes inscribir tus talleres y visitas porque todavía no es tu turno de inscripción y momento del registro.</p>
+					<h3>Regresa el <strong><%= @current_attendee.hora_asignada %></strong></h3>
+				</div>
+        <% end %>
+			</div>
+
+			</div>
+			<!-- END CONTAINER -->
+
+		</div>
+		<!-- END CONTENT -->

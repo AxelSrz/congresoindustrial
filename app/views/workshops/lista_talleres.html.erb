@@ -1,0 +1,91 @@
+<!-- MAIN MENU -->
+<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+					<li><%= link_to "Asistentes", lista_asistentes_path %></li>
+          <li><%= link_to "Talleres", lista_talleres_path, class: "current" %></li>
+					<li><%= link_to "Visitas", lista_visitas_path %></li>
+					<li><%= link_to "Herramientas", herramientas_path %></li>
+				</ul>
+			</div>
+		</div>
+</div>
+<!-- END MAIN MENU -->
+
+<!-- CONTENT -->
+	<div class="content">
+
+		<!-- CONTAINER -->
+		<div class="container">
+
+			<!-- left content -->
+			<div class="main">
+				<h1>Talleres</h1>
+				<hr>
+
+				<!-- filtro -->
+				<p style="margin:12px 0 0 0;">Selecciona un filtro:</p>
+				<ul class="list-inline listfilter">
+					<li><a href="#"><strong>Todos</strong></a></li>
+					<li><a href="#">Por nombre</a></li>
+					<li><a href="#">Por tipo</a></li>
+					<li><a href="#">Por fecha</a></li>
+					<li><a href="#">Por cupo</a></li>
+					<li><a href="#">Por disponibilidad</a></li>
+					<li><a href="#">Por inscritos</a></li>
+				</ul>
+
+				<!-- tabla -->
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+              <th>#</th>
+							<th>Taller</th>
+							<th>Tipo</th>
+							<th>Fecha y hora</th>
+							<th>Cupo máximo</th>
+							<th>Disponibilidad actual</th>
+							<th>Cambiar disponibilidad</th>
+							<th>Inscritos actuales</th>
+						</tr>
+					</thead>
+					<tbody>
+            <% @workshops.each_with_index do |workshop, index| %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= workshop['representante'] %></td>
+              <td><%= workshop['tipo'] %></td>
+              <td><%= workshop['fecha'] %></td>
+              <td><%= workshop['cupo_maximo'] %></td>
+              <td><%= workshop['cupo_actual'] %></td>
+              <td><a href="" class="btn">Cambiar</a></td>
+              <td><%= workshop['asistentes_registrados'] %></td>
+            </tr>
+            <% end %>
+					</tbody>
+				</table>
+
+			</div>
+
+			<!-- right sidebar -->
+			<div class="aside">
+        <p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+  				<br/><%= link_to "Cerrar Sesion", logout_path%></p>
+  			</p>
+
+				<h3>Actividades</h3>
+
+				<ul class="sidebar">
+          <li><%= link_to "Añadir un taller", nuevo_taller_path %></li>
+					<li><a href ="">Exportar esta lista</a></li>
+				</ul>
+
+				</div>
+
+			</div>
+			<!-- END CONTAINER -->
+
+		</div>
+		<!-- END CONTENT -->

@@ -1,13 +1,55 @@
-<% @page_title = "UserAuth | Login" -%>
-<div class= "Sign_Form">
-  <h1>Inicia sesion</h1>
-  <%= form_tag(:action => 'registro_atendee') do %>
-    <p> Nombre:</br> <%= text_field_tag :nombre%> </p>
-    <p> Email:</br> <%= text_field_tag :email%> </p>
-    <p> universidad:</br> <%= text_field_tag :universidad%> </p>
-    <p> Password:</br> <%= password_field_tag :password%></p>
-    <p> Password Confirmation:</br> <%= password_field_tag :password_confirmation%> </p>
-    <p> Codigo de registro:</br> <%= text_field_tag :registration_code%> </p>
-  <%= submit_tag("Inicia sesion") %>
-  <% end %>
 </div>
+
+<!-- CONTENT -->
+	<div class="content">
+
+		<!-- CONTAINER -->
+		<div class="container">
+
+			<!-- left content -->
+			<div class="mainLong">
+				<div class="login">
+					<h1>Completa tu registro</h1>
+					<hr>
+                    <div class="separator">&nbsp;</div>
+
+					<%= form_tag(:action => 'registro_atendee') do %>
+						<h3>Nombre completo</h3>
+            <%= text_field_tag :nombre, nil, placeholder: "Nombre y apellidos" %>
+                        <div class="separator"></div>
+
+                        <h3>Correo electrónico</h3>
+            <%= text_field_tag :email, nil, placeholder: "obligatorio"%>
+                        <p style="text-size:8px; margin-top:10px;">Recuerda usar la misma dirección a la que te llego el correo de registro.</p>
+						<div class="separator"></div>
+
+                        <h3>Universidad*</h3>
+            <%= text_field_tag :universidad, nil, placeholder: "opcional"%>
+						<div class="separator"></div>
+
+                        <h3>Crea una contraseña</h3>
+                        <%= password_field_tag :password, nil, placeholder: "obligatorio"%>
+						<div class="separator"></div>
+
+                        <h3>Confirma la contraseña</h3>
+                        <%= password_field_tag :password_confirmation, nil, placeholder: "obligatorio"%>
+						<div class="separator"></div>
+
+                        <h3>Código de registro</h3>
+                        <%= text_field_tag :registration_code, nil, placeholder: "obligatorio"%>
+                        <p style="text-size:8px; margin-top:10px;">Copia y pega el código de registro que te ha llegado a tu correo.</p>
+                        <div class="separator">&nbsp;</div>
+
+            <%= submit_tag "Continuar" , class: "btn" %>
+						<div class="separator"></div>
+
+                        <p>* = opcional</p>
+					<% end %>
+				</div>
+			</div>
+
+		</div>
+		<!-- END CONTAINER -->
+
+	</div>
+	<!-- END CONTENT -->

@@ -17,6 +17,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'flavour_saver'
 gem 'therubyracer'
 gem 'bcrypt'
+gem 'figaro'
+gem 'mailgun-ruby', '~>1.0.2', require: 'mailgun'
+gem 'delayed_job_active_record'
 
 # Javascript libraries
 gem 'jquery-datatables-rails', '~> 3.1.1'
@@ -44,6 +47,7 @@ gem 'bootstrap-wysihtml5-rails'
 gem 'tinymce-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-timepicker-addon-rails'
+gem 'jquery-timepicker-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-datetimepicker'
 end

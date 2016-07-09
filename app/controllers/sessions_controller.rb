@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  before_filter :authenticate_user, :only => [:index, :home, :profile, :setting]
+  before_filter :authenticate_user, :only => [:index, :home, :profile, :setting, :herramientas]
   before_filter :authenticate_attendee, :only => [:attendee_home]
   before_filter :save_login_state, :only => [:login, :login_attempt]
 
@@ -54,6 +54,9 @@ class SessionsController < ApplicationController
   end
 
   def setting
+  end
+
+  def herramientas
   end
 
 end

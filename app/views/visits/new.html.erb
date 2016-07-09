@@ -1,0 +1,87 @@
+<!-- MAIN MENU -->
+<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+					<li><%= link_to "Asistentes", lista_asistentes_path %></li>
+					<li><%= link_to "Talleres", lista_talleres_path %></li>
+					<li><%= link_to "Visitas", lista_visitas_path, class: "current" %></li>
+					<li><%= link_to "Herramientas", herramientas_path %></li>
+				</ul>
+			</div>
+		</div>
+</div>
+<!-- END MAIN MENU -->
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- CONTAINER -->
+  <div class="container">
+
+    <!-- left content -->
+    <div class="main">
+      <h1><%= link_to "Visitas", lista_visitas_path %> > Añadir una visita</h1>
+      <hr>
+
+      <%= form_tag(:url => {:controller => 'visits', :action => 'create'}) do |f| %>
+        <h3>1. Nombre de la empresa:</h3>
+        <%= text_field_tag :empresa, nil, placeholder: "Nombre de la empresa" %>
+        <div class="separator"></div>
+
+        <h3>2. Descripción</h3>
+        <%= text_area_tag :descripcion, nil, placeholder: "Escribe una breve descripción de la visita." %></p>
+        <div class="separator"></div>
+
+        <h3>3. Lugar</h3>
+        <%= text_field_tag :lugar, nil, placeholder: "Define un lugar para esta visita." %>
+        <div class="separator"></div>
+
+        <h3>4. Fecha y hora</h3>
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <%= datetime_field_tag :fecha, nil, id:'datetimepicker1', placeholder: "aaaa/mm/dd  hh:mm" %></p>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker();
+                    });
+                </script>
+            </div>
+        </div>
+        <div class="separator"></div>
+
+        <h3>5. Duración</h3>
+        <%= text_field_tag :duracion, nil, placeholder: "--:-- (hh:mm)", size: "11", class: "textSmall" %>
+        <div class="separator"></div>
+
+        <h3>6. Cupo máximo</h3>
+        <%= number_field_tag :cupo_maximo, nil, min: "0" %>
+        <div class="separator"></div>
+
+        <h3>Estamos listos</h3>
+        <%= submit_tag "Crear visita", class: "btn" %>
+
+        <% end %>
+    </div>
+
+    <!-- right sidebar -->
+		<div class="aside">
+      <p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+        <br /><%= link_to "Cerrar Sesion", logout_path%>
+      </p>
+
+			<h3>Actividades</h3>
+
+				<ul class="sidebar">
+					<li><%= link_to "Ver lista de visitas", lista_visitas_path %></li>
+				</ul>
+
+				</div>
+
+    </div>
+    <!-- END CONTAINER -->
+
+  </div>
+  <!-- END CONTENT -->

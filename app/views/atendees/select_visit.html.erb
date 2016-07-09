@@ -1,9 +1,74 @@
-<% @available_visits.each do |visit| %>
-  <tr>
-      <td><%= visit['nombre'] %></td>
-      <td><%= visit['descripcion'] %></td>
-      <td><%= visit['empresa'] %></td>
-      <td><%= visit['lugar'] %></td>
-      <td><%= button_to 'seleccionar', {:controller => "atendees", :action => "associate_visit", :id => visit['id']} , {:method=>:post}  %></td>
-  </tr>
-<% end %>
+<!-- MAIN MENU -->
+	<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+          <li><%= link_to "Inicio", inicio_path %></li>
+          <% if @current_attendee.hora_asignada < DateTime.now %>
+          <li><%= link_to "Talleres", seleccion_taller_path %></li>
+          <li><%= link_to "Visitas", seleccion_visita_path, class: "current" %></li>
+          <% end %>
+          <li><%= link_to "Cerrar sesión de #{@current_attendee.nombre.partition(" ").first}", logout_path %></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- END MAIN MENU -->
+
+	<!-- CONTENT -->
+	<div class="content">
+
+		<!-- CONTAINER -->
+		<div class="container">
+
+			<!-- left content -->
+			<div class="mainLong">
+
+				<% if !@current_attendee.visit %>
+				<h1 class="centerText">Selecciona una visita</h1>
+				<hr>
+
+				<div style="separatorLarge">&nbsp;</div>
+
+        <% @available_visits.each_with_index do |visit, index| %>
+          <div class="oneThird">
+  					<div class="conceptEnclosure" id="<%= 'gridLast' if index%3 == 2 %>">
+  						<h3><%= visit.empresa %></h3>
+  						<p><%= visit.descripcion %></p>
+  						<p>
+  							<strong>Fecha y hora:</strong><br />
+  							<%= visit.fecha %><br />
+  							<strong>Lugar:</strong><br />
+  							<%= visit.lugar %><br />
+  							<strong>Disponibilidad:</strong><br />
+  							<%= visit.cupo_actual %>/<%= visit.asistentes_registrados + visit.cupo_actual %>
+  						</p>
+              <%= button_to 'Inscribir', {:controller => "atendees", :action => "associate_visit", :id => visit['id']} , {:method=>:post, class: "btn"}  %>
+  					</div>
+  				</div>
+        <% end %>
+        <div style="separatorLarge">&nbsp;</div>
+				<% else %>
+				<div class="centerText">
+					<h1>Estas inscrito en la siguiente visita:</h1>
+					<hr>
+
+					<h2><%= @current_attendee.visit.empresa %></h2>
+					<p><%= @current_attendee.visit.descripcion %></p>
+					<p>
+						<strong>Fecha y hora:</strong><br />
+						<%= @current_attendee.visit.fecha %><br />
+          </p>
+          <p>
+						<strong>Lugar:</strong><br />
+						<%= @current_attendee.visit.lugar %>
+					</p>
+				</div>
+				<% end %>
+			</div>
+
+			</div>
+			<!-- END CONTAINER -->
+
+		</div>
+		<!-- END CONTENT -->

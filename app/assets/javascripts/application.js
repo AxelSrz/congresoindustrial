@@ -17,3 +17,4 @@
 //= require moment
 //= require jquery-ui
 //= require datetimepicker
+//= require jquery.timepicker.js

@@ -1,16 +1,15 @@
 <!-- MAIN MENU -->
 <div class="nav-bar">
-  <div class="container">
-    <div id="centerDiv">
-      <ul class="nav centerUL">
-        <li><a href="#">Asistentes</a></li>
-        <li><%= link_to "Registrar asistentes", registro_asistentes_path %></li>
-        <li><%= link_to "Alta de talleres y visitas", agregar_vot_path, class: "current" %></li>
-        <li><a href="#">Abrir lugares en taller o visita</a></li>
-        <li><a href="#">Crear un administrador</a></li>
-      </ul>
-    </div>
-  </div>
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+					<li><%= link_to "Asistentes", lista_asistentes_path %></li>
+					<li><a href="admin-talleres.html">Talleres</a></li>
+					<li><a href="admin-visitas.html">Visitas</a></li>
+					<li><a href="admin-herramientas.html">Herramientas</a></li>
+				</ul>
+			</div>
+		</div>
 </div>
 <!-- END MAIN MENU -->
 
@@ -26,8 +25,8 @@
       <hr>
 
       <h3>Selecciona la opción que deseas</h3>
-      <a href="" class="btn">Dar de alta un taller</a>
-      <a href="" class="btn">Dar de alta una visita</a>
+      <%= link_to "Dar de alta un taller", nuevo_taller_path, class: "btn" %>
+      <%= link_to "Dar de alta una visita", nueva_visita_path, class: "btn" %>
     </div>
 
     <!-- right sidebar -->

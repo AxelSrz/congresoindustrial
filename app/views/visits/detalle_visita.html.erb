@@ -1,0 +1,115 @@
+	<!-- MAIN MENU -->
+  <div class="nav-bar">
+  		<div class="container">
+  			<div id="centerDiv">
+  				<ul class="nav centerUL">
+  					<li><%= link_to "Asistentes", lista_asistentes_path %></li>
+            <li><%= link_to "Talleres", lista_talleres_path %></li>
+  					<li><%= link_to "Visitas", lista_visitas_path, class: "current" %></li>
+  					<li><%= link_to "Herramientas", herramientas_path %></li>
+  				</ul>
+  			</div>
+  		</div>
+  </div>
+	<!-- END MAIN MENU -->
+
+	<!-- CONTENT -->
+	<div class="content">
+
+		<!-- CONTAINER -->
+		<div class="container">
+
+			<!-- left content -->
+			<div class="main">
+				<h1><%= link_to "Visitas", lista_visitas_path %> > <%= @visit.empresa %></h1>
+				<hr>
+
+				<form>
+
+					<h3>Nombre de la empresa/visita</h3>
+					<p><%= @visit.empresa %></p>
+
+					<h3>Descripción</h3>
+					<p><%= @visit.descripcion %></p>
+
+					<h3>Lugar</h3>
+					<p><%= @visit.lugar %></p>
+
+					<h3>Fecha y hora</h3>
+					<p><%= @visit.fecha %></p>
+
+					<h3>Duración</h3>
+					<p>5 horas</p>
+
+					<h3>Cupo máximo</h3>
+					<p><%= @visit.cupo_maximo %></p>
+
+					<h3>Inscritos actuales</h3>
+					<p><%= @visit.asistentes_registrados %></p>
+
+					<h3>Disponibilidad actual</h3>
+					<p>
+            <%= form_tag(:url => {:controller => 'visits', :action => 'create'}) do |f| %>
+						<input type="number" id="cupoMaximoTaller" min="10" max="200" value="120">
+						&nbsp;
+						<input type="submit" id="commit" value="Actualizar" class="btn">
+						<ul>
+							<li>La disponbilidad debe ser mayor o igual a la cantidad de inscritos actuales.</li>
+							<li>La disponibilidad no debe exceder el cupo máximo asignado</li>
+						</ul>
+					</p>
+
+				</form>
+
+				<hr>
+				<h2>Inscritos actuales - detalle</h2>
+
+				<!-- tabla -->
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nombre completo</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody>
+            <% @visit.atendees.each do |atendee| %>
+						<tr>
+							<td><%= atendee.nombre %></td>
+							<td><%= atendee.email %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+
+			</div>
+
+			<!-- right sidebar -->
+			<div class="aside">
+        <p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+  				<br/><%= link_to "Cerrar Sesion", logout_path%></p>
+  			</p>
+
+				<h3>Actividades</h3>
+
+				<ul class="sidebar">
+          <li><%= link_to "Añadir una visita", nueva_visita_path %></li>
+          <li><%= link_to "Ver lista de visitas", lista_visitas_path %></li>
+					<li><a href ="">Exportar lista de asistentes</a></li>
+				</ul>
+
+			</div>
+
+		</div>
+		<!-- END CONTAINER -->
+
+	</div>
+	<!-- END CONTENT -->
+
+	<!-- FOOTER -->
+	<div class="footer">
+		<div class="container">
+			&copy; Copyright 2016, Congreso Industrial
+		</div>
+	</div>
+	<!-- END FOOTER -->

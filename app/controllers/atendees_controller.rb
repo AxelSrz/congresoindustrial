@@ -1,5 +1,5 @@
 class AtendeesController < ApplicationController
-  before_filter :authenticate_user, :only => [:new, :create]
+  before_filter :authenticate_user, :only => [:new, :create, :lista_asistentes, :no_confirmados]
   before_filter :authenticate_attendee, :only => [:select_visit, :select_workshop, :associate_visit, :associate_workshop]
 
   def new
@@ -10,8 +10,9 @@ class AtendeesController < ApplicationController
     list_of_emails = atendee_params[:emails].split("\r\n")
     list_of_emails.each do |email|
       @atendee = Atendee.new(email: email, hora_asignada: params[:hora_asignada])
-      unless @atendee.save
-        binding.pry
+      if @atendee.save
+        # SendEmailJob.set(wait: 10.seconds).perform_later(@atendee)
+      else
         flash[:notice] = "Form is invalid"
         flash[:color]= "invalid"
       end
@@ -27,24 +28,32 @@ class AtendeesController < ApplicationController
   end
 
   def select_visit
-    @available_visits = Visit.available
-    render "select_visit"
+    if @current_attendee.hora_asignada < DateTime.now
+      @available_visits = Visit.available
+      render "select_visit"
+    else
+      redirect_to '/inicio'
+    end
   end
 
   def select_workshop
-    @available_workshops = Workshop.available
-    render "select_workshop"
+    if @current_attendee.hora_asignada < DateTime.now
+      @available_workshops = Workshop.available
+      render "select_workshop"
+    else
+      redirect_to '/inicio'
+    end
   end
 
   def associate_visit
     visit = Visit.find(params[:id])
-    if visit.cupo_actual > 0
+    if visit.cupo_actual > 0 && !@current_attendee.visit && @current_attendee.hora_asignada < DateTime.now
       @current_attendee.visit = visit
       visit.cupo_actual -= 1
       visit.asistentes_registrados += 1
       @current_attendee.save
       visit.save
-      redirect_to '/attendee_home'
+      redirect_to '/inicio'
     else
       select_visit
     end
@@ -52,13 +61,13 @@ class AtendeesController < ApplicationController
 
   def associate_workshop
     workshop = Workshop.find(params[:id])
-    if workshop.cupo_actual > 0
+    if workshop.cupo_actual > 0 && !@current_attendee.workshop && @current_attendee.hora_asignada < DateTime.now
       @current_attendee.workshop = workshop
       workshop.cupo_actual -= 1
       workshop.asistentes_registrados += 1
       @current_attendee.save
       workshop.save
-      redirect_to '/attendee_home'
+      redirect_to '/inicio'
     else
       select_workshop
     end
@@ -68,7 +77,18 @@ class AtendeesController < ApplicationController
     if params[:password] == params[:password_confirmation]
       Atendee.check_registration(atendee_registration_params)
     end
-    redirect_to '/login_asistente'
+    redirect_to '/registro_exitoso'
+  end
+
+  def registration_success
+  end
+
+  def lista_asistentes
+    @atendees = Atendee.confirmed
+  end
+
+  def no_confirmados
+    @atendees = Atendee.not_confirmed
   end
 
   def logout

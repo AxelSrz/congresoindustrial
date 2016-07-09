@@ -9,6 +9,9 @@ class Atendee < ActiveRecord::Base
   before_save :encrypt_password
   after_save :clear_password
 
+  scope :confirmed, -> { where(confirmado: true) }
+  scope :not_confirmed, -> { where(confirmado: false) }
+
   # Class methods
   def self.authenticate(email="", login_password="")
     if  EMAIL_REGEX.match(email)

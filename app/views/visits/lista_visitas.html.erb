@@ -1,0 +1,90 @@
+<!-- MAIN MENU -->
+<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+					<li><%= link_to "Asistentes", lista_asistentes_path %></li>
+          <li><%= link_to "Talleres", lista_talleres_path %></li>
+					<li><%= link_to "Visitas", lista_visitas_path, class: "current" %></li>
+					<li><%= link_to "Herramientas", herramientas_path %></li>
+				</ul>
+			</div>
+		</div>
+</div>
+<!-- END MAIN MENU -->
+
+<!-- CONTENT -->
+	<div class="content">
+
+		<!-- CONTAINER -->
+		<div class="container">
+
+			<!-- left content -->
+			<div class="main">
+				<h1>Visitas</h1>
+				<hr>
+
+				<!-- filtro -->
+				<p style="margin:12px 0 0 0;">Selecciona un filtro:</p>
+				<ul class="list-inline listfilter">
+					<li><a href="#"><strong>Todos</strong></a></li>
+					<li><a href="#">Por nombre</a></li>
+					<li><a href="#">Por fecha</a></li>
+					<li><a href="#">Por cupo</a></li>
+					<li><a href="#">Por disponibilidad</a></li>
+					<li><a href="#">Por inscritos</a></li>
+				</ul>
+
+				<!-- tabla -->
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+              <th>#</th>
+							<th>Empresa</th>
+							<th>Fecha y hora</th>
+							<th>Cupo máximo</th>
+							<th>Disponibilidad actual</th>
+							<th>Ver más</th>
+							<th>Inscritos actuales</th>
+						</tr>
+					</thead>
+					<tbody>
+            <tbody>
+              <% @visits.each_with_index do |visit, index| %>
+              <tr>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= visit['empresa'] %></td>
+                <td><%= visit['fecha'] %></td>
+                <td><%= visit['cupo_maximo'] %></td>
+                <td><%= visit['cupo_actual'] %></td>
+                <td><%= link_to "Detalles", detalle_visita_path(visit.id), class: "btn" %></td>
+                <td><%= visit['asistentes_registrados'] %></td>
+              </tr>
+              <% end %>
+  					</tbody>
+					</tbody>
+				</table>
+
+			</div>
+
+			<!-- right sidebar -->
+      <div class="aside">
+        <p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+  				<br/><%= link_to "Cerrar Sesion", logout_path%></p>
+  			</p>
+
+				<h3>Actividades</h3>
+
+				<ul class="sidebar">
+          <li><%= link_to "Añadir una visita", nueva_visita_path %></li>
+					<li><a href ="">Exportar esta lista</a></li>
+				</ul>
+
+				</div>
+
+			</div>
+			<!-- END CONTAINER -->
+
+		</div>
+		<!-- END CONTENT -->

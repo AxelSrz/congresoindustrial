@@ -1,0 +1,99 @@
+<!-- MAIN MENU -->
+<div class="nav-bar">
+		<div class="container">
+			<div id="centerDiv">
+				<ul class="nav centerUL">
+					<li><%= link_to "Asistentes", lista_asistentes_path, class: "current" %></li>
+					<li><%= link_to "Talleres", lista_talleres_path %></li>
+					<li><%= link_to "Visitas", lista_visitas_path %></li>
+					<li><%= link_to "Herramientas", herramientas_path %></li>
+				</ul>
+			</div>
+		</div>
+</div>
+<!-- END MAIN MENU -->
+
+<!-- CONTENT -->
+	<div class="content">
+
+		<!-- CONTAINER -->
+		<div class="container">
+
+			<!-- left content -->
+			<div class="main">
+				<h1>Asistentes</h1>
+				<p><%= link_to "Ver asistentes no confirmados", no_confirmados_path %></p>
+				<hr>
+
+				<!-- filtro -->
+				<p style="margin:12px 0 0 0;">Selecciona un filtro:</p>
+				<ul class="list-inline listfilter">
+					<li><a href="#"><strong>Todos</strong></a></li>
+					<li><a href="#">Por nombre</a></li>
+					<li><a href="#">Por correo</a></li>
+					<li><a href="#">Por turno</a></li>
+					<li><a href="#">Por taller inscrito</a></li>
+					<li><a href="#">Por visita inscrita</a></li>
+				</ul>
+
+				<!-- tabla -->
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nombre completo</th>
+							<th>Email</th>
+							<th>Turno</th>
+							<th>Taller</th>
+							<th>Visita</th>
+							<th>Recuperar contraseña</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tbody>
+		          <% @atendees.each_with_index do |atendee, index| %>
+							<tr>
+								<th scope="row"><%= index + 1 %></th>
+		            <td><%= atendee['nombre'] %></td>
+		            <td><%= atendee['email'] %></td>
+		            <td><%= atendee.hora_asignada %></td>
+		            <% if atendee.visit %>
+		              <td><%= atendee.visit.empresa %></td>
+		            <% else %>
+		              <td>Sin inscribir</td>
+		            <% end %>
+		            <% if atendee.workshop %>
+		              <td><%= atendee.workshop.representante %></td>
+		            <% else %>
+		              <td>Sin inscribir</td>
+		            <% end %>
+		                          <td><a href="" class="btn">Recuperar</a></td>
+							</tr>
+		          <% end %>
+						</tbody>
+					</tbody>
+				</table>
+
+			</div>
+
+			<!-- right sidebar -->
+			<div class="aside">
+	      <p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+	        <br /><%= link_to "Cerrar Sesion", logout_path%></p>
+				</p>
+
+				<h3>Actividades</h3>
+
+				<ul class="sidebar">
+					<li><%= link_to "Añadir asistentes", registro_asistentes_path %></li>
+					<li><a href ="">Exportar esta lista</a></li>
+				</ul>
+
+			</div>
+
+			</div>
+			<!-- END CONTAINER -->
+
+		</div>
+		<!-- END CONTENT -->
