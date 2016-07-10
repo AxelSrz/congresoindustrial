@@ -32,7 +32,8 @@ Rails.application.routes.draw do
   get "seleccion_visita", :to => "atendees#select_visit"
   get "seleccion_taller", :to => "atendees#select_workshop"
   get "registro_exitoso", :to => "atendees#registration_success"
-  get "detalle_visita/:id", :to => "visits#detalle_visita", as: "detalle_visita"
+  put "detalle_visita/:id", :to => "visits#detalle_visita", as: "detalle_visita"
+  put "detalle_taller/:id", :to => "workshops#detalle_taller", as: "detalle_taller"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

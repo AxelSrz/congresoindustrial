@@ -1,0 +1,106 @@
+<!-- MAIN MENU -->
+<div class="nav-bar">
+    <div class="container">
+      <div id="centerDiv">
+        <ul class="nav centerUL">
+          <li><%= link_to "Asistentes", lista_asistentes_path %></li>
+          <li><%= link_to "Talleres", lista_talleres_path, class: "current" %></li>
+          <li><%= link_to "Visitas", lista_visitas_path %></li>
+          <li><%= link_to "Herramientas", herramientas_path %></li>
+        </ul>
+      </div>
+    </div>
+</div>
+<!-- END MAIN MENU -->
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- CONTAINER -->
+  <div class="container">
+
+    <!-- left content -->
+    <div class="main">
+      <h1><%= link_to "Talleres", lista_talleres_path %> > <%= @workshop.representante %></h1>
+      <hr>
+
+      <form>
+
+        <h3>Nombre del tallerista</h3>
+        <p><%= @workshop.representante %></p>
+
+        <h3>Tipo</h3>
+        <p><%= @workshop.tipo %></p>
+
+        <h3>Fecha y hora</h3>
+        <p><%= @workshop.fecha %></p>
+
+        <h3>Cupo máximo</h3>
+        <p><%= @workshop.cupo_maximo %></p>
+
+        <h3>Inscritos actuales</h3>
+        <p><%= @workshop.asistentes_registrados %></p>
+
+        <h3>Disponibilidad actual</h3>
+        <p><%= @workshop.cupo_actual %></p>
+
+        <h3>Abrir lugares</h3>
+        <p>
+          <%= form_tag(:url => {:controller => 'workshops', :action => 'abrir_lugares'}) do |f| %>
+          <%= number_field_tag 'cantidad', '0', min: 0, max: @workshop.cupo_maximo - (@workshop.asistentes_registrados + @workshop.cupo_actual)  %>
+          &nbsp;
+          <%= hidden_field_tag 'id', "#{@workshop.id}" %>
+          <%= submit_tag "Abrir lugares", class: "btn" %> %>
+          <% end %>
+          <ul>
+            <li>La disponbilidad debe ser mayor o igual a la cantidad de inscritos actuales.</li>
+            <li>La disponibilidad no debe exceder el cupo máximo asignado</li>
+          </ul>
+        </p>
+
+      </form>
+
+      <hr>
+      <h2>Inscritos actuales - detalle</h2>
+
+      <!-- tabla -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre completo</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @workshop.atendees.each do |atendee| %>
+          <tr>
+            <td><%= atendee.nombre %></td>
+            <td><%= atendee.email %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+
+    <!-- right sidebar -->
+    <div class="aside">
+      <p>Has iniciado sesión como <strong><%= @current_user.nombre %></strong>
+        <br/><%= link_to "Cerrar Sesion", logout_path%></p>
+      </p>
+
+      <h3>Actividades</h3>
+
+      <ul class="sidebar">
+        <li><%= link_to "Añadir un taller", nuevo_taller_path %></li>
+        <li><%= link_to "Ver lista de talleres", lista_talleres_path %></li>
+        <li><a href ="">Exportar lista de asistentes</a></li>
+      </ul>
+
+    </div>
+
+  </div>
+  <!-- END CONTAINER -->
+
+</div>
+<!-- END CONTENT -->

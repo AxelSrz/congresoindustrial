@@ -1,5 +1,5 @@
 class VisitsController < ApplicationController
-  before_filter :authenticate_user, :only => [:new, :create, :success, :lista_visitas, :detalle_visita]
+  before_filter :authenticate_user, :only => [:new, :create, :success, :lista_visitas, :detalle_visita, :abrir_lugares]
   def new
     @visit = Visit.new()
   end
@@ -24,6 +24,13 @@ class VisitsController < ApplicationController
 
   def detalle_visita
     @visit = Visit.find(params[:id])
+  end
+
+  def abrir_lugares
+    @visit = Visit.find(params[:id])
+    @visit.cupo_actual += params[:visits]
+    @visit.save
+    detalle_visita
   end
 
   private

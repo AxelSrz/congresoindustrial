@@ -47,12 +47,17 @@
 					<h3>Inscritos actuales</h3>
 					<p><%= @visit.asistentes_registrados %></p>
 
-					<h3>Disponibilidad actual</h3>
+          <h3>Disponibilidad actual</h3>
+          <p><%= @visit.cupo_actual %></p>
+
+					<h3>Abrir lugares</h3>
 					<p>
-            <%= form_tag(:url => {:controller => 'visits', :action => 'create'}) do |f| %>
-						<input type="number" id="cupoMaximoTaller" min="10" max="200" value="120">
-						&nbsp;
-						<input type="submit" id="commit" value="Actualizar" class="btn">
+            <%= form_tag(:url => {:controller => 'visits', :action => 'abrir_lugares'}) do |f| %>
+            <%= number_field_tag 'cantidad', '0', min: 0, max: @visit.cupo_maximo - (@visit.asistentes_registrados + @visit.cupo_actual)  %>
+            &nbsp;
+            <%= hidden_field_tag 'id', "#{@visit.id}" %>
+            <%= submit_tag "Abrir lugares", class: "btn" %> %>
+            <% end %>
 						<ul>
 							<li>La disponbilidad debe ser mayor o igual a la cantidad de inscritos actuales.</li>
 							<li>La disponibilidad no debe exceder el cupo máximo asignado</li>
@@ -105,11 +110,3 @@
 
 	</div>
 	<!-- END CONTENT -->
-
-	<!-- FOOTER -->
-	<div class="footer">
-		<div class="container">
-			&copy; Copyright 2016, Congreso Industrial
-		</div>
-	</div>
-	<!-- END FOOTER -->
