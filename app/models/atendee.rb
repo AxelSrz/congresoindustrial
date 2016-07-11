@@ -26,7 +26,7 @@ class Atendee < ActiveRecord::Base
 
   def self.check_registration(params)
     params[:confirmado] = true
-    params[:fecha_registro] = Date.today
+    params[:fecha_registro] = Date.current
     attendee = Atendee.where(:email => params[:email], :registration_code => params[:registration_code], :confirmado => false).first
     if !attendee.nil?
       attendee.update_attributes(params)

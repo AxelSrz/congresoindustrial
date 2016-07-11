@@ -4,7 +4,7 @@
 			<div id="centerDiv">
 				<ul class="nav centerUL">
           <li><%= link_to "Inicio", inicio_path, class: "current" %></li>
-          <% if @current_attendee.hora_asignada < DateTime.now %>
+          <% if @current_attendee.hora_asignada < Time.zone.now %>
           <li><%= link_to "Talleres", seleccion_taller_path %></li>
           <li><%= link_to "Visitas", seleccion_visita_path %></li>
           <% end %>
@@ -27,7 +27,7 @@
 				<p class="centerText"><%= @current_attendee.email %></p>
 				<hr>
 				<div style="separatorLarge">&nbsp;</div>
-        <% if @current_attendee.hora_asignada < DateTime.now %>
+        <% if @current_attendee.hora_asignada < Time.zone.now %>
 				<div class="oneHalf" id="gridFirst">
 					<div class="conceptEnclosure">
 						<h1>Taller</h1>
@@ -38,7 +38,11 @@
     					<h3><%= @current_attendee.workshop.representante %></h3>
     					<p>
     						<strong>Fecha y hora:</strong><br />
-    						<%= @current_attendee.workshop.fecha %><br />
+								<% if @current_attendee.workshop.fecha %>
+    						<%= l(@current_attendee.workshop.fecha, format: '%B %d, de %Y, hora: %I:%M %p') %><br />
+								<% else %>
+								<td>Sin asignar</td>
+								<% end %>
     						<strong>Lugar:</strong><br />
     						<%= @current_attendee.workshop.lugar %>
     					</p>
@@ -56,7 +60,11 @@
             <h3><%= @current_attendee.visit.empresa %></h3>
             <p>
                <strong>Fecha y hora:</strong><br />
-               <%= @current_attendee.visit.fecha %><br />
+							 <% if @current_attendee.visit.fecha %>
+               <%= l(@current_attendee.visit.fecha, format: '%B %d, de %Y, hora: %I:%M %p') %><br />
+							 <% else %>
+							 <td>Sin asignar</td>
+							 <% end %>
                <strong>Lugar:</strong><br />
                <%= @current_attendee.visit.lugar %>
             </p>
@@ -76,7 +84,7 @@
         <% else %>
         <div class="centerText">
 					<p>Lo sentimos, todavía no puedes inscribir tus talleres y visitas porque todavía no es tu turno de inscripción y momento del registro.</p>
-					<h3>Regresa el <strong><%= @current_attendee.hora_asignada %></strong></h3>
+					<h3>Regresa el <strong><%= l(@current_attendee.hora_asignada, format: '%B %d, de %Y, hora: %I:%M %p') %></strong></h3>
 				</div>
         <% end %>
 			</div>

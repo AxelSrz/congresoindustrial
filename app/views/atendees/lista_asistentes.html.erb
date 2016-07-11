@@ -57,7 +57,11 @@
 								<th scope="row"><%= index + 1 %></th>
 		            <td><%= atendee['nombre'] %></td>
 		            <td><%= atendee['email'] %></td>
-		            <td><%= atendee.hora_asignada %></td>
+								<% if atendee.hora_asignada %>
+		            <td><%= l(atendee.hora_asignada, format: '%b/%d/%Y, hora: %H:%M') %></td>
+								<% else %>
+								<td>Sin asignar</td>
+								<% end %>
 		            <% if atendee.visit %>
 		              <td><%= atendee.visit.empresa %></td>
 		            <% else %>

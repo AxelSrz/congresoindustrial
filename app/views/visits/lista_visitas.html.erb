@@ -45,7 +45,7 @@
 							<th>Fecha y hora</th>
 							<th>Cupo máximo</th>
 							<th>Disponibilidad actual</th>
-							<th>Ver más</th>
+							<th>Cambiar disponibilidad</th>
 							<th>Inscritos actuales</th>
 						</tr>
 					</thead>
@@ -55,10 +55,14 @@
               <tr>
                 <th scope="row"><%= index + 1 %></th>
                 <td><%= visit['empresa'] %></td>
-                <td><%= visit['fecha'] %></td>
+								<% if(visit.fecha) %>
+                <td><%= l(visit.fecha, format: '%b/%d/%Y, hora: %H:%M') %></td>
+								<% else %>
+								<td>Sin asignar</td>
+								<% end %>
                 <td><%= visit['cupo_maximo'] %></td>
                 <td><%= visit['cupo_actual'] %></td>
-                <td><%= link_to "Detalles", detalle_visita_path(visit.id), class: "btn" %></td>
+                <td><%= link_to "Cambiar", detalle_visita_path(visit.id), class: "btn" %></td>
                 <td><%= visit['asistentes_registrados'] %></td>
               </tr>
               <% end %>

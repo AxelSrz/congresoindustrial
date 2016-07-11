@@ -4,7 +4,7 @@
 			<div id="centerDiv">
 				<ul class="nav centerUL">
           <li><%= link_to "Inicio", inicio_path %></li>
-          <% if @current_attendee.hora_asignada < DateTime.now %>
+          <% if @current_attendee.hora_asignada < Time.zone.now %>
           <li><%= link_to "Talleres", seleccion_taller_path %></li>
           <li><%= link_to "Visitas", seleccion_visita_path, class: "current" %></li>
           <% end %>
@@ -37,7 +37,11 @@
   						<p><%= visit.descripcion %></p>
   						<p>
   							<strong>Fecha y hora:</strong><br />
-  							<%= visit.fecha %><br />
+								<% if visit.fecha %>
+  							<%= l(visit.fecha, format: '%B %d, de %Y, hora: %I:%M %p') %><br />
+								<% else %>
+								<td>Sin asignar</td>
+								<% end %>
   							<strong>Lugar:</strong><br />
   							<%= visit.lugar %><br />
   							<strong>Disponibilidad:</strong><br />
@@ -57,7 +61,11 @@
 					<p><%= @current_attendee.visit.descripcion %></p>
 					<p>
 						<strong>Fecha y hora:</strong><br />
-						<%= @current_attendee.visit.fecha %><br />
+						<% if @current_attendee.visit.fecha %>
+						<%= l(@current_attendee.visit.fecha, format: '%B %d, de %Y, hora: %I:%M %p') %><br />
+						<% else %>
+						<td>Sin asignar</td>
+						<% end %>
           </p>
           <p>
 						<strong>Lugar:</strong><br />

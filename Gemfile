@@ -20,6 +20,7 @@ gem 'bcrypt'
 gem 'figaro'
 gem 'mailgun-ruby', '~>1.0.2', require: 'mailgun'
 gem 'delayed_job_active_record'
+gem 'rails-i18n'
 
 # Javascript libraries
 gem 'jquery-datatables-rails', '~> 3.1.1'

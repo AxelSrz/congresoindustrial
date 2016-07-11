@@ -11,7 +11,7 @@ class AtendeesController < ApplicationController
     list_of_emails.each do |email|
       @atendee = Atendee.new(email: email, hora_asignada: params[:hora_asignada])
       if @atendee.save
-        # SendEmailJob.set(wait: 10.seconds).perform_later(@atendee)
+        SendEmailJob.set(wait: 10.seconds).perform_later(@atendee)
       else
         flash[:notice] = "Form is invalid"
         flash[:color]= "invalid"
@@ -28,7 +28,7 @@ class AtendeesController < ApplicationController
   end
 
   def select_visit
-    if @current_attendee.hora_asignada < DateTime.now
+    if @current_attendee.hora_asignada < Time.zone.now
       @available_visits = Visit.available
       render "select_visit"
     else
@@ -37,7 +37,7 @@ class AtendeesController < ApplicationController
   end
 
   def select_workshop
-    if @current_attendee.hora_asignada < DateTime.now
+    if @current_attendee.hora_asignada < Time.zone.now
       @available_workshops = Workshop.available
       render "select_workshop"
     else
@@ -47,7 +47,7 @@ class AtendeesController < ApplicationController
 
   def associate_visit
     visit = Visit.find(params[:id])
-    if visit.cupo_actual > 0 && !@current_attendee.visit && @current_attendee.hora_asignada < DateTime.now
+    if visit.cupo_actual > 0 && !@current_attendee.visit && @current_attendee.hora_asignada < Time.zone.now
       @current_attendee.visit = visit
       visit.cupo_actual -= 1
       visit.asistentes_registrados += 1
@@ -61,7 +61,7 @@ class AtendeesController < ApplicationController
 
   def associate_workshop
     workshop = Workshop.find(params[:id])
-    if workshop.cupo_actual > 0 && !@current_attendee.workshop && @current_attendee.hora_asignada < DateTime.now
+    if workshop.cupo_actual > 0 && !@current_attendee.workshop && @current_attendee.hora_asignada < Time.zone.now
       @current_attendee.workshop = workshop
       workshop.cupo_actual -= 1
       workshop.asistentes_registrados += 1

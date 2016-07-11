@@ -24,8 +24,6 @@
 				<h1><%= link_to "Visitas", lista_visitas_path %> > <%= @visit.empresa %></h1>
 				<hr>
 
-				<form>
-
 					<h3>Nombre de la empresa/visita</h3>
 					<p><%= @visit.empresa %></p>
 
@@ -36,10 +34,11 @@
 					<p><%= @visit.lugar %></p>
 
 					<h3>Fecha y hora</h3>
-					<p><%= @visit.fecha %></p>
-
-					<h3>Duración</h3>
-					<p>5 horas</p>
+          <% if @visit.fecha %>
+					<p><%= l(@visit.fecha, format: '%B %d, de %Y, hora: %I:%M %p') %></p>
+          <% else %>
+          <td>Sin asignar</td>
+          <% end %>
 
 					<h3>Cupo máximo</h3>
 					<p><%= @visit.cupo_maximo %></p>
@@ -52,19 +51,17 @@
 
 					<h3>Abrir lugares</h3>
 					<p>
-            <%= form_tag(:url => {:controller => 'visits', :action => 'abrir_lugares'}) do |f| %>
-            <%= number_field_tag 'cantidad', '0', min: 0, max: @visit.cupo_maximo - (@visit.asistentes_registrados + @visit.cupo_actual)  %>
+            <%= form_tag("abrir_lugares_visitas", method: :put) do %>
+            <%= number_field_tag 'cantidad', 0, min: 0, max: @visit.cupo_maximo - (@visit.asistentes_registrados + @visit.cupo_actual)  %>
             &nbsp;
             <%= hidden_field_tag 'id', "#{@visit.id}" %>
-            <%= submit_tag "Abrir lugares", class: "btn" %> %>
+            <%= submit_tag "Abrir lugares", class: "btn" %>
             <% end %>
 						<ul>
 							<li>La disponbilidad debe ser mayor o igual a la cantidad de inscritos actuales.</li>
 							<li>La disponibilidad no debe exceder el cupo máximo asignado</li>
 						</ul>
 					</p>
-
-				</form>
 
 				<hr>
 				<h2>Inscritos actuales - detalle</h2>

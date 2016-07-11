@@ -57,10 +57,14 @@
               <th scope="row"><%= index + 1 %></th>
               <td><%= workshop['representante'] %></td>
               <td><%= workshop['tipo'] %></td>
-              <td><%= workshop['fecha'] %></td>
+							<% if workshop.fecha %>
+              <td><%= l(workshop.fecha, format: '%b/%d/%Y, hora: %H:%M') %></td>
+							<% else %>
+							<td>Sin asignar</td>
+							<% end %>
               <td><%= workshop['cupo_maximo'] %></td>
               <td><%= workshop['cupo_actual'] %></td>
-              <td><a href="" class="btn">Cambiar</a></td>
+              <td><%= link_to "Cambiar", detalle_taller_path(workshop.id), class: "btn" %></td>
               <td><%= workshop['asistentes_registrados'] %></td>
             </tr>
             <% end %>

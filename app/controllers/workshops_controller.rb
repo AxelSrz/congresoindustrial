@@ -1,5 +1,5 @@
 class WorkshopsController < ApplicationController
-  before_filter :authenticate_user, :only => [:new, :create, :success, :lista_talleres, :detalle_taller, :abrir_lugares]
+  before_filter :authenticate_user, :only => [:new, :create, :success, :lista_talleres, :detalle_taller, :abrir_lugares_talleres]
   def new
     @workshop = Workshop.new()
   end
@@ -26,11 +26,11 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.find(params[:id])
   end
 
-  def abrir_lugares
+  def abrir_lugares_talleres
     @workshop = Workshop.find(params[:id])
-    @workshop.cupo_actual += params[:visits]
+    @workshop.cupo_actual += params[:cantidad].to_i
     @workshop.save
-    detalle_taller
+    render "detalle_taller"
   end
 
   private
