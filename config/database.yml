@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: congresoindustrial_production
+  database: antonir1_congresoindustrial_production
   username: congresoindustrial
   password: <%= ENV['CONGRESOINDUSTRIAL_DATABASE_PASSWORD'] %>
