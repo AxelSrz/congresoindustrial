@@ -84,7 +84,8 @@ class AtendeesController < ApplicationController
   end
 
   def lista_asistentes
-    @atendees = Atendee.confirmed
+    @search = Atendee.search(confirmado: true)
+    @atendees = @search.result
   end
 
   def no_confirmados

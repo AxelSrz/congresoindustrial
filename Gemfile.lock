@@ -355,6 +355,8 @@ GEM
     parser (2.3.0.6)
       ast (~> 2.2)
     pg (0.18.4)
+    polyamorous (1.3.1)
+      activerecord (>= 3.0)
     powerpack (0.1.1)
     premailer (1.8.6)
       css_parser (>= 1.3.6)
@@ -421,6 +423,12 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (11.1.2)
+    ransack (1.8.0)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.3)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -602,6 +610,7 @@ DEPENDENCIES
   rails-i18n
   rails_12factor
   rake (= 11.1.2)
+  ransack
   remotipart (~> 1.2)
   rspec-collection_matchers
   rspec-rails
