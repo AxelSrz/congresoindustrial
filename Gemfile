@@ -70,7 +70,6 @@ gem 'net-ssh'
 ###############################################################################
 # User authentication & session management
 # Crud Controller
-gem 'crud_controller', git: 'http://git.ukko.mx/ukko/crud_controller.git'
 
 group :development, :test do
   # Testing
