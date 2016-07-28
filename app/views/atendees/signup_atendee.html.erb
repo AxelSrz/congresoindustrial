@@ -8,6 +8,9 @@
 
 			<!-- left content -->
 			<div class="mainLong">
+				<% if flash[:alert] %>
+    			<p style="color:red; text-align:center;"><%= flash[:alert] %></p>
+  			<% end %>
 				<div class="login">
 					<h1>Completa tu registro</h1>
 					<hr>

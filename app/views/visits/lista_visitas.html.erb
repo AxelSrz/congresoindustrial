@@ -45,7 +45,7 @@
 							<th>Fecha y hora</th>
 							<th>Cupo máximo</th>
 							<th>Disponibilidad actual</th>
-							<th>Cambiar disponibilidad</th>
+							<th>Detalles</th>
 							<th>Inscritos actuales</th>
 						</tr>
 					</thead>
@@ -62,7 +62,7 @@
 								<% end %>
                 <td><%= visit['cupo_maximo'] %></td>
                 <td><%= visit['cupo_actual'] %></td>
-                <td><%= link_to "Cambiar", detalle_visita_path(visit.id), class: "btn" %></td>
+                <td><%= link_to "Ver más", detalle_visita_path(visit.id), class: "btn" %></td>
                 <td><%= visit['asistentes_registrados'] %></td>
               </tr>
               <% end %>

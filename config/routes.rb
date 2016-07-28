@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'workshop/new'
 
   post ':controller(/:action(/:id))(.:format)'
-  root :to => 'sessions#login'
+  root :to => 'sessions#login_atendee'
   get "login", :to => "sessions#login"
   get "logout", :to => "sessions#logout"
   get "home", :to => "sessions#home"
@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get "detalle_taller/:id", :to => "workshops#detalle_taller", as: "detalle_taller"
   put "detalle_visita/abrir_lugares_visitas", :to => "visits#abrir_lugares_visitas", as: "abrir_lugares_visitas"
   put "detalle_taller/abrir_lugares_talleres", :to => "workshops#abrir_lugares_talleres", as: "abrir_lugares_talleres"
+  delete "borrar_asistente", :to => "atendees#borrar_asistente", as: "borrar_asistente"
+  get "recuperar_password", :to => "atendees#recuperar_password"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

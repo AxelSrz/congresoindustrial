@@ -55,13 +55,16 @@
             <%= number_field_tag 'cantidad', 0, min: 0, max: @visit.cupo_maximo - (@visit.asistentes_registrados + @visit.cupo_actual)  %>
             &nbsp;
             <%= hidden_field_tag 'id', "#{@visit.id}" %>
-            <%= submit_tag "Abrir lugares", class: "btn" %>
-            <% end %>
 						<ul>
 							<li>La disponbilidad debe ser mayor o igual a la cantidad de inscritos actuales.</li>
 							<li>La disponibilidad no debe exceder el cupo máximo asignado</li>
 						</ul>
 					</p>
+
+          <h3>Cambiar lugar</h3>
+          <p><%= text_field_tag :lugar, @visit.lugar %></p>
+          <%= submit_tag "Actualizar", class: "btn" %>
+          <% end %>
 
 				<hr>
 				<h2>Inscritos actuales - detalle</h2>

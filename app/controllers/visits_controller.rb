@@ -29,6 +29,7 @@ class VisitsController < ApplicationController
   def abrir_lugares_visitas
     @visit = Visit.find(params[:id])
     @visit.cupo_actual += params[:cantidad].to_i
+    @visit.lugar = params[:lugar]
     @visit.save
     render "detalle_visita"
   end

@@ -29,6 +29,7 @@ class WorkshopsController < ApplicationController
   def abrir_lugares_talleres
     @workshop = Workshop.find(params[:id])
     @workshop.cupo_actual += params[:cantidad].to_i
+    @workshop.lugar = params[:lugar]
     @workshop.save
     render "detalle_taller"
   end
@@ -36,6 +37,6 @@ class WorkshopsController < ApplicationController
   private
 
   def workshop_params
-    params.permit(:nombre, :descripcion, :empresa, :lugar, :fecha, :duracion, :cupo_maximo)
+    params.permit(:representante, :tipo, :descripcion, :empresa, :lugar, :fecha, :duracion, :cupo_maximo)
   end
 end

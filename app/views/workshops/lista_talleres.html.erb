@@ -47,7 +47,7 @@
 							<th>Fecha y hora</th>
 							<th>Cupo máximo</th>
 							<th>Disponibilidad actual</th>
-							<th>Cambiar disponibilidad</th>
+							<th>Detalles</th>
 							<th>Inscritos actuales</th>
 						</tr>
 					</thead>
@@ -64,7 +64,7 @@
 							<% end %>
               <td><%= workshop['cupo_maximo'] %></td>
               <td><%= workshop['cupo_actual'] %></td>
-              <td><%= link_to "Cambiar", detalle_taller_path(workshop.id), class: "btn" %></td>
+              <td><%= link_to "Ver más", detalle_taller_path(workshop.id), class: "btn" %></td>
               <td><%= workshop['asistentes_registrados'] %></td>
             </tr>
             <% end %>

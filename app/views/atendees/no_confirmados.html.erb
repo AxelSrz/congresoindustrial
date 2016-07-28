@@ -39,10 +39,13 @@
           <% @atendees.each_with_index do |atendee, index| %>
 					<tr>
 						<th scope="row"><%= index + 1 %></th>
-						<td><%= atendee.created_at %></td>
+						<td><%= l(atendee.created_at, format: '%b/%d/%Y, hora: %H:%M') %></td>
             <td><%= atendee['email'] %></td>
             <td><%= atendee.registration_code %></td>
-						<td><a href="" class="btn red">Borrar</a></td>
+						<td><%= form_tag("borrar_asistente", method: :delete) do %>
+            <%= hidden_field_tag 'id', "#{atendee.id}" %>
+            <%= submit_tag "Borrar", class: "btn red" %>
+            <% end %></td>
 					</tr>
           <% end %>
 				</tbody>

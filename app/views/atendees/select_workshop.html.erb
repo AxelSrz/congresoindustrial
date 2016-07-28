@@ -45,8 +45,8 @@
 								<% end %>
   							<strong>Lugar:</strong><br />
   							<%= workshop.lugar %><br />
-  							<strong>Disponibilidad:</strong><br />
-  							<%= workshop.cupo_actual %>/<%= workshop.asistentes_registrados + workshop.cupo_actual %>
+  							<strong>Lugares disponibles:</strong><br />
+  							<%= workshop.cupo_actual %>
   						</p>
               <%= button_to 'Inscribir', {:controller => "atendees", :action => "associate_workshop", :id => workshop['id']} , {:method=>:post, class: "btn"}  %>
   					</div>

@@ -39,9 +39,15 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    session[:admin_id] = nil
-    session[:atendee_id] = nil
-		redirect_to :action => 'login'
+    if session[:atendee_id]
+      session[:admin_id] = nil
+      session[:atendee_id] = nil
+      redirect_to :action => 'login_atendee'
+    elsif session[:admin_id]
+      session[:admin_id] = nil
+      session[:atendee_id] = nil
+      redirect_to :action => 'login'
+    end
 	end
 
   def home

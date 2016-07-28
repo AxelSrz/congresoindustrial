@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624012127) do
+ActiveRecord::Schema.define(version: 20160728063904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20160624012127) do
     t.string   "registration_code"
     t.boolean  "confirmado",         default: false
     t.datetime "hora_asignada"
+    t.string   "recovery_code"
+    t.boolean  "pase_diario",        default: false
   end
 
   add_index "atendees", ["visit_id"], name: "index_atendees_on_visit_id", using: :btree

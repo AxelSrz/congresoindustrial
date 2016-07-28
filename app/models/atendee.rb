@@ -30,7 +30,21 @@ class Atendee < ActiveRecord::Base
     attendee = Atendee.where(:email => params[:email], :registration_code => params[:registration_code], :confirmado => false).first
     if !attendee.nil?
       attendee.update_attributes(params)
+      return true
     end
+    false
+  end
+
+  def self.change_password(params)
+    attendee = Atendee.where(:email => params[:email], :recovery_code => params[:recovery_code], :confirmado => true).first
+    if !attendee.nil?
+      o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
+      code = (0...24).map { o[rand(o.length)] }.join
+      params[:recovery_code] = code
+      attendee.update_attributes(params)
+      return true
+    end
+    false
   end
 
   # Instance methods
@@ -53,5 +67,7 @@ class Atendee < ActiveRecord::Base
     o = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a }.flatten
     code = (0...24).map { o[rand(o.length)] }.join
     self.registration_code = code
+    recovery = (0...24).map { o[rand(o.length)] }.join
+    self.recovery_code = recovery
   end
 end

@@ -44,8 +44,8 @@
 								<% end %>
   							<strong>Lugar:</strong><br />
   							<%= visit.lugar %><br />
-  							<strong>Disponibilidad:</strong><br />
-  							<%= visit.cupo_actual %>/<%= visit.asistentes_registrados + visit.cupo_actual %>
+  							<strong>Lugares disponibles:</strong><br />
+  							<%= visit.cupo_actual %>
   						</p>
               <%= button_to 'Inscribir', {:controller => "atendees", :action => "associate_visit", :id => visit['id']} , {:method=>:post, class: "btn"}  %>
   					</div>

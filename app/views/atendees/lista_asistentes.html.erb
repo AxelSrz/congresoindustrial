@@ -34,7 +34,7 @@
 							<th>Turno</th>
 							<th>Taller</th>
 							<th>Visita</th>
-							<th>Recuperar contraseña</th>
+							<th>Código de recuperación</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -59,7 +59,11 @@
 		            <% else %>
 		              <td>Sin inscribir</td>
 		            <% end %>
-		                          <td><a href="" class="btn">Recuperar</a></td>
+								<% if atendee.recovery_code %>
+		              <td><%= atendee.recovery_code %></td>
+								<% else %>
+			            <td> </td>
+			          <% end %>
 							</tr>
 		          <% end %>
 						</tbody>
